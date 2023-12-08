@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -16,5 +15,6 @@
     "nodemon": "^3.0.2",
     "openai": "^4.20.1"
   },
-  "type": "module"
+  "type": "module",
+  "description": ""
 }
