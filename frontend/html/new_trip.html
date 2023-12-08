@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New trip</title>
     <link rel="stylesheet" href="../css/new_trip.css">
 </head>
+
 <body>
     <div>
-        <p id="startPoint_p">
+        <div id="startPoint">
             <label>Starting Point:</label><br>
             <input type="text" id="startPoint" placeholder="What is the starting point of your trip?">
-        </p>
-        <p id="interests_p">
+        </div>
+        <div id="interests">
             <label>Interests:</label><br>
             <input type="text" id="interests" placeholder="Tell me about your interests.">
-        </p>
-        <p id="budget_p">
+        </div>
+        <div id="budget">
             <label>Budget:</label><br>
             <input type="text" id="budget" placeholder="What is your maximum budget?">
-        </p>
-        <p id="categories_p">
+        </div>
+        <div id="categories">
             <label>Categories:</label><br>
-            <form id = "categories" action="#" method="post">
+            <form id="categories" action="#" method="post">
                 <label>
                     <input type="checkbox" name="selectedFields[]" value="history"> History
                 </label>
-            
+
                 <label>
                     <input type="checkbox" name="selectedFields[]" value="art"> Art
                 </label>
-            
+
                 <label>
                     <input type="checkbox" name="selectedFields[]" value="arhitecture"> Arhitecture
                 </label>
             </form>
-        </p>
-        <p id="time_p">
+        </div>
+        <div id="time">
             <label>Time:</label><br>
             <input type="number" id="time" min="1">
-        </p>
-        <p id="photo_p">
+        </div>
+        <div id="photo">
             <form>
                 <label>Select a file:</label>
                 <input type="file" id="photo" name="photo" accept=".jpg, .jpeg, .png, .gif">
-              </form> 
-        </p>
+            </form>
+        </div>
+        <div id="submit">
+            <button>GENERATE</button>
+        </div>
     </div>
     <script src="../js/new_trip.js"></script>
 </body>
+
 </html>
