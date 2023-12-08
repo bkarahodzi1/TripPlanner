@@ -9,7 +9,7 @@ import OpenAI from "openai";
 const openai = new OpenAI({apiKey : process.env.apiKey});
 
 
-async function generateText(base64) {
+export async function generateText(base64) {
   const response = await openai.chat.completions.create({
     model: "gpt-4-vision-preview",
     messages: [
