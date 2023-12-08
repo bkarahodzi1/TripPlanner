@@ -1,12 +1,10 @@
-function onLoadPage(){
+function onLoadPage() {
     let option = localStorage.getItem('selectedOption');
-    if (option == 'new')
-    {
+    if (option == 'new') {
         console.log("if")
 
     }
-    else if(option == 'guide')
-    {
+    else if (option == 'guide') {
         let startPoint = document.getElementById("startPoint_p");
         startPoint.remove();
         console.log("else if")
@@ -14,5 +12,7 @@ function onLoadPage(){
         title = "Tourist guide";
     }
 }
+
+
 
 window.onLoad = onLoadPage();
