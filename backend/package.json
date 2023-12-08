@@ -1,12 +1,12 @@
 {
-  "name": "code-experts",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "Web Aplikacija Hackathon 2023 Code Experts",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Code Experts",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "node": "^21.2.0"
