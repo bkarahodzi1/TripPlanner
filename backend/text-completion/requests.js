@@ -3,11 +3,12 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 
+console.log(process.env.apiKey)
 const openai = new OpenAI({
-    apiKey: process.env.apiKey, // defaults to process.env["OPENAI_API_KEY"]
+    apiKey: process.env.apiKey
 });
   
-async function main() {
+async function getLocations() {
     const stream = await openai.chat.completions.create({
         model: 'gpt-4',
         messages: [{ role: 'user', content: 'Tell me about london' }],
@@ -15,5 +16,5 @@ async function main() {
       console.log(stream)
       console.log(stream.choices[0])
 }
-main();
+
 console.log(process.env.apiKey);
