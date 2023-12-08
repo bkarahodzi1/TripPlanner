@@ -9,11 +9,13 @@ const corsOptions ={
   optionSuccessStatus:200,
 }
 
-app.use(cors(corsOptions))
 
 
 const app = express();
 const port = 4000;
+
+app.use(cors(corsOptions))
+
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
