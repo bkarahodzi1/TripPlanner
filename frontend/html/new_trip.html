@@ -9,49 +9,53 @@
 </head>
 
 <body>
-    <div>
-        <div id="startPoint_div">
-            <label>Starting Point:</label><br>
-            <input type="text" id="startPoint" placeholder="What is the starting point of your trip?">
+    <div id="container">
+        <div id="album_div">
+            <img id="album" src="../img/2846005556_0f5bc44419_o.jpg" alt="placeholder">
         </div>
-        <div id="interests_div">
-            <label>Interests:</label><br>
-            <input type="text" id="interests" placeholder="Tell me about your interests.">
-        </div>
-        <div id="budget_div">
-            <label>Budget:</label><br>
-            <input type="text" id="budget" placeholder="What is your maximum budget?">
-        </div>
-        <div id="categories_div">
-            <label>Categories:</label><br>
-            <form id="categories" action="#" method="post">
+        <div id="form">
+            <div id="startPoint_div">
+                <label>Starting Point:</label><br>
+                <input type="text" id="startPoint" placeholder="What is the starting point of your trip?">
+            </div>
+            <div id="interests_div">
+                <label>Interests:</label><br>
+                <input type="text" id="interests" placeholder="Tell me about your interests.">
+            </div>
+            <div id="budget_div">
+                <label>Budget:</label><br>
+                <input type="text" id="budget" placeholder="What is your maximum budget?">
+            </div>
+            <div id="categories_div">
+                <label>Categories:</label><br>
                 <label>
                     <input type="checkbox" name="selectedFields[]" value="history"> History
                 </label>
-
+    
                 <label>
                     <input type="checkbox" name="selectedFields[]" value="art"> Art
                 </label>
-
+    
                 <label>
-                    <input type="checkbox" name="selectedFields[]" value="arhitecture"> Arhitecture
+                    <input type="checkbox" name="selectedFields[]" value="architecture"> Architecture
                 </label>
-            </form>
-        </div>
-        <div id="time_div">
-            <label>Time:</label><br>
-            <input type="number" id="time" min="1">
-        </div>
-        <div id="photo_div">
-            <form>
-                <label>Select a file:</label>
-                <input type="file" id="photo" name="photo" accept=".jpg, .jpeg, .png, .gif">
-            </form>
-        </div>
-        <div id="submit_div">
-            <button>GENERATE</button>
+            </div>
+            <div id="time_div">
+                <label>Time:</label><br>
+                <input type="number" id="time" min="1">
+            </div>
+            <div id="photo_div">
+                <form>
+                    <label>Select a file:</label><br>
+                    <input type="file" id="photo" name="photo" accept=".jpg, .jpeg, .png, .gif">
+                </form>
+            </div>
+            <div id="submit_div">
+                <button>GENERATE</button>
+            </div>
         </div>
     </div>
+    
     <script src="../js/new_trip.js"></script>
 </body>
 
