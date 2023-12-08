@@ -1,19 +1,16 @@
-import OpenAI from "openai";
-import dotenv from 'dotenv'
+import express from 'express'
+import bodyParser from 'body-parser';
 
-dotenv.config();
+const app = express();
+const port = 4000;
 
-const openai = new OpenAI({
-    apiKey: process.env.apiKey, // defaults to process.env["OPENAI_API_KEY"]
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+//app.use('/users',userRoutes);
+//app.use('/auth',authRouter);
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
 });
-  
-async function main() {
-    const stream = await openai.chat.completions.create({
-        model: 'gpt-4',
-        messages: [{ role: 'user', content: 'Tell me about london' }],
-      });
-      console.log(stream)
-      console.log(stream.choices[0])
-}
-main();
-console.log(process.env.apiKey);
+
