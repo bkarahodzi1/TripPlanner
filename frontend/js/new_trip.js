@@ -7,6 +7,8 @@ function onLoad(){
     else if(option == 'guide')
     {
         let polazna = document.getElementById("startPoint_p");
-
+        polazna.remove();
+        let naslov = document.title;
+        naslov = "Tourist guide";
     }
 }
