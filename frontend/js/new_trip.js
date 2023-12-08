@@ -17,16 +17,16 @@ function onLoadPage() {
 let submitButton = document.getElementById("submit_div").getElementsByTagName("button")[0];
 
 submitButton.addEventListener('click', function () {
-    const url = 'http://localhost:4000/locations/locations';
+    const url = 'http://localhost:4000/locations';
 
     const body = {};
     body["start_point"] = document.getElementById("startPoint_div").getElementsByTagName("input")[0].value;
     body["interests"] = document.getElementById("interests_div").getElementsByTagName("input")[0].value;
     body["budget"] = document.getElementById("budget_div").getElementsByTagName("input")[0].value;
     body["categories"] = [];
-    for (cat of document.getElementById("budget_div").getElementsByTagName("input"))
+    for (let cat of document.getElementById("categories_div").getElementsByTagName("input"))
         if (cat.checked)
-            categories.push(cat.value);
+            body["categories"].push(cat.value);
     body["trip_length"] = document.getElementById("time_div").getElementsByTagName("input")[0].value;
 
     const input = document.getElementById('photo');
@@ -42,11 +42,13 @@ submitButton.addEventListener('click', function () {
         reader.readAsDataURL(file);
     }
 
+    console.log(JSON.stringify(body));
+
     fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin' : '*'
+            'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(body)
     })
