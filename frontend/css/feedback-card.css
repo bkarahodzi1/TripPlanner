@@ -1,0 +1,36 @@
+body {
+    width: 100%;
+}
+
+#title {
+    text-align: center;
+}
+
+#description {
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#images {
+    float: left;
+}
+
+#images img {
+    width: 200px;
+    height: 200px;
+}
+
+#button {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+}
+
+#button input {
+    text-wrap: wrap;
+    height: 100px;
+    width: 100px;
+}
