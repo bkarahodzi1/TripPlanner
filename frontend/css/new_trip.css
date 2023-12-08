@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set the width of the input field to 100% and include padding and border in the width calculation */
+#startPoint {
+    width: 50%;
+    box-sizing: border-box;
+}
+#interests {
+    width: 50%;
+    box-sizing: border-box;
+}
+#budget {
+    width: 50%;
+    box-sizing: border-box;
+}
+#categories_p {
+    padding: 0%;
+    margin: 0%;
+}
