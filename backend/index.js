@@ -9,7 +9,7 @@ const port = 4000;
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.use('/locations', router);
+app.use('', router);
 
 //app.use('/users',userRoutes);
 //app.use('/auth',authRouter);
