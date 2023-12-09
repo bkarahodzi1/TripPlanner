@@ -134,6 +134,17 @@ label{
 #onParamsBtn{
     margin-left: 10px;
 }
+#home:hover{
+    cursor: pointer;
+}
+#home{
+    z-index: 1010;
+  position: absolute;
+  top:1%;
+  left:1%;
+  width: 3%;
+  height: auto;
+}
 #onImgBtn, #onParamsBtn{
     width: 30%;
     min-height: 40%;

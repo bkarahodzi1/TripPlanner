@@ -9,4 +9,8 @@ function selectOption(option) {
     localStorage.setItem('selectedOption', option);
     window.location.href = '/html/new_trip.html';
 }
+
+function goHome(){
+    window.location.href = "http://localhost:4000/home";
+}
   

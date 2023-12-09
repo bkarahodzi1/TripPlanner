@@ -5,6 +5,17 @@ body {
     background-color: #e1cde9;
   }
   
+#home:hover{
+  cursor: pointer;
+}
+#home{
+  z-index: 1010;
+position: absolute;
+top:1%;
+left:1%;
+width: 3%;
+height: auto;
+}
   .day-card {
     max-width: 1200px;
     height: 170px;
