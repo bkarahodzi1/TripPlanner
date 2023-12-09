@@ -114,9 +114,10 @@ function openPlan(btnDivRef) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            trip_plan = data["0"];
-            localStorage.setItem('tripPlan', trip_plan);
+            trip_plan = data;
+            trip_plan["duration"] = body["trip_length"];
+            localStorage.setItem("tripPlan", JSON.stringify(trip_plan["0"]));
+            window.location.href = '/html/tourist-guide.html';
         })  
         .catch(error => {
             console.error('Error:', error);
