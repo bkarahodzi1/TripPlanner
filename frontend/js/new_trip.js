@@ -1,11 +1,13 @@
-recommended_list = [];
+let recommended_list = [];
+let body = {}
+let trip_plan = []
 
-function onSubmit(){
+function onSubmit() {
     let loader = document.getElementById("loader");
     let container = document.getElementById('container');
 
 
-    container.style.cssText=`
+    container.style.cssText = `
     height: 100vh;
     display: flex;
     align-items: center; 
@@ -28,7 +30,7 @@ function onSubmit(){
     margin: -50px 0 0 -50px;
     z-index: 1000;
     `
-    
+
 }
 
 
@@ -40,10 +42,9 @@ function onLoadPage() {
         let title = document.title;
         title = "Tourist guide";
     }
-    else
-    {
+    else {
         let infoText = document.getElementById("info-text");
-        infoText.innerHTML= ` 
+        infoText.innerHTML = ` 
         <p>
             <b>Starting point</b><br>
             Tell me the location you want to travel from.
@@ -99,12 +100,35 @@ function imgSwitcher() {
 
 let submitButton = document.getElementById("submit_div").getElementsByTagName("button")[0];
 
+function openPlan(btnDivRef) {
+    console.log("CHOOSE BUTTON CLICKED");
+    const url = 'http://localhost:4000/plan';
+    body["location"] = recommended_list[btnDivRef.id]["LocationName"];
+    console.log(body);
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            trip_plan = data["0"];
+            localStorage.setItem('tripPlan', trip_plan);
+        })  
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
 submitButton.addEventListener('click', function () {
     const url = 'http://localhost:4000/locations';
     let option = localStorage.getItem('selectedOption');
 
     if (option == "new") {
-        const body = {};
+        body = {};
         body["start_point"] = document.getElementById("startPoint_div").getElementsByTagName("textarea")[0].value;
         body["interests"] = document.getElementById("interests_div").getElementsByTagName("textarea")[0].value;
         body["budget"] = document.getElementById("budget_div").getElementsByTagName("textarea")[0].value;
@@ -139,7 +163,10 @@ submitButton.addEventListener('click', function () {
             .then(response => response.json())
             .then(data => {
                 console.log('Response:', data);
-
+                if ("error" in data) {
+                    alert(data["error"]);
+                    return;
+                }
                 recommended_list = data["0"];
                 let container = document.getElementById("card-container");
                 for (let i = 0; i < recommended_list.length; i++) {
@@ -159,12 +186,12 @@ submitButton.addEventListener('click', function () {
                         </div>
                     </div>
                     <div class="button">
-                        <button id="btn"><b>Choose</b></button>
+                        <button class="btn" onclick=openPlan(this) id="${i}"><b>Choose</b></button>
                     </div>`
                     container.appendChild(locationCard);
                 }
                 let loader = document.getElementById("loader");
-                loader.style.cssText=`
+                loader.style.cssText = `
                 width: 100px;
                 height: 100px;
                 position: absolute;
@@ -189,11 +216,11 @@ submitButton.addEventListener('click', function () {
                
                 `
             }
-                )
+            )
             .catch(error => {
                 console.error('Error:', error);
             });
-    } else if (option == "") {
+    } else if (option == "guide") {
 
     }
 });
