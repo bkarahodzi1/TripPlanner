@@ -1,4 +1,6 @@
-/* Your CSS styles go here */
+
+
+
 
 body {
     margin: 0;
@@ -6,15 +8,22 @@ body {
     color: #0d3c52;
     background-color: #ccabd9;
     font-family:Cambria;
+
+    
 }
+
+
 label{
     font-size: 170%;
 }
 #container{
+    
     height: 100vh;
     display: flex;
     align-items: center; 
     background-image: url("../img/random_images/background1.png");
+    
+
 }
 
 #form {
