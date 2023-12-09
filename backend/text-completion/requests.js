@@ -113,6 +113,8 @@ export async function getLocations(start_point, interests, budget, categories, t
     const [imageUrls] = await Promise.all([imageUrlsPromise]);
     const locationPromise = appendUrlsToLocations(locations,imageUrls)
     locations = await Promise.all([locationPromise])
+
+    
     return locations;
     
 }
@@ -139,7 +141,7 @@ export async function planTrip(start_point,budget,categories,trip_length,locatio
       
       let dailyPlans = ""
       try {
-        console.log(stream.choices[0].message.content);
+       
         dailyPlans =  JSON.parse(stream.choices[0].message.content.toString());
       } catch (error) {
         return {"error" : "Something went wrong! Try to change your parameters"};

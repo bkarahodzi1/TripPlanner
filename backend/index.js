@@ -28,7 +28,7 @@ app.use('',homeRouter)
 //app.use('/auth',authRouter);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  
 });
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

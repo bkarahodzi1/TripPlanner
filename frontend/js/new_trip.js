@@ -2,10 +2,37 @@ let recommended_list = [];
 let body = {}
 let trip_plan = []
 
+function unsetLoaderCss(loader,container){
+    loader.style.cssText = `
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    visibility:hidden;
+    display: none;
+    `
+   
+    container.style.cssText = `
+    height: 100vh;
+    display: flex;
+    align-items: center; 
+    background-image: url("../img/random_images/background1.png");
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -o-filter: blur(0px);
+    -ms-filter: blur(0px);
+    filter: blur(0px);
+   
+    `
+}
+
 function onSubmit() {
     let loader = document.getElementById("loader");
     let container = document.getElementById('container');
 
+    
 
     container.style.cssText = `
     height: 100vh;
@@ -123,6 +150,8 @@ function openPlan(btnDivRef) {
         });
 }
 
+
+
 submitButton.addEventListener('click', function () {
     const url = 'http://localhost:4000/locations';
     let option = localStorage.getItem('selectedOption');
@@ -165,14 +194,30 @@ submitButton.addEventListener('click', function () {
                 console.log('Response:', data);
                 if ("error" in data) {
                     alert(data["error"]);
+                    let fullContainer = document.getElementById("container");
+                    let loader = document.getElementById("loader");
+                    unsetLoaderCss(loader,fullContainer)
+                   
+                   
                     return;
                 }
                 recommended_list = data["0"];
                 let container = document.getElementById("card-container");
-                for (let i = 0; i < recommended_list.length; i++) {
+                let max = 3;
+                if (recommended_list<3){
+                    max=3;
+                }
+                let loader = document.getElementById("loader");
+                let fullContainer = document.getElementById("container")
+                for (let i = 0; i < max; i++) {
                     console.log("ADDING CARD");
                     const locationCard = document.createElement('div');
                     locationCard.classList.add('location-card');
+                    if (recommended_list[i]["LocationName"]==undefined||recommended_list[i]["Description"]==undefined){
+                        alert("Something went wrong, try again!");
+                        unsetLoaderCss(loader,fullContainer)
+                        return
+                    }
                     locationCard.innerHTML = `
                     <div class="image">
                         <img src="${recommended_list[i]["image"]}" alt="${recommended_list[i]["image"]}">
@@ -190,35 +235,15 @@ submitButton.addEventListener('click', function () {
                     </div>`
                     container.appendChild(locationCard);
                 }
-                let loader = document.getElementById("loader");
-                loader.style.cssText = `
-                width: 100px;
-                height: 100px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                margin: -50px 0 0 -50px;
-                visibility:hidden;
-                display: none;
-                `
-                let fullContainer = document.getElementById("container")
-                fullContainer.style.cssText = `
-                height: 100vh;
-                display: flex;
-                align-items: center; 
-               
-                background-image: url("../img/random_images/background1.png");
-                -webkit-filter: blur(0px);
-                -moz-filter: blur(0px);
-                -o-filter: blur(0px);
-                -ms-filter: blur(0px);
-                filter: blur(0px);
-               
-                `
+                
+                unsetLoaderCss(loader, fullContainer);
+                
             }
             )
             .catch(error => {
+                console.log("ERROR");
                 console.error('Error:', error);
+                
             });
     } else if (option == "guide") {
 
