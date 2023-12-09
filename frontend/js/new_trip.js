@@ -39,6 +39,35 @@ function onLoadPage() {
         let title = document.title;
         title = "Tourist guide";
     }
+    else
+    {
+        let infoText = document.getElementById("info-text");
+        infoText.innerHTML= ` 
+        <p>
+            <b>Starting point</b><br>
+            Tell me the location you want to travel from.
+        </p>
+    <p>
+        <b>Interests</b><br>
+        Tell me about what interests you generally, so I can recommend places that fit you better.
+    </p>
+    <p>
+        <b>Budget</b><br>
+        Tell me what is the maximum of your budget you are willing to spend on this trip.
+    </p>
+    <p>
+        <b>Categories</b><br>
+        Select which of the given categories would best describe what you would like to explore in the location.
+    </p>
+    <p>
+        <b>Time</b><br>
+        Select how long your trip will be (in days).
+    </p>
+    <p>
+        <b>Upload an example image</b><br>
+        Select a photo of a place you like the look of and I will base my suggestions on places that are similar to that photo.
+    </p>`
+    }
 }
 document.addEventListener('DOMContentLoaded', function () {
     var infoButton = document.getElementById('info-button');
