@@ -7,6 +7,35 @@ function onLoadPage() {
         let title = document.title;
         title = "Tourist guide";
     }
+    else
+    {
+        let infoText = document.getElementById("info-text");
+        infoText.innerHTML= ` 
+        <p>
+            <b>Starting point</b><br>
+            Tell me the location you want to travel from.
+        </p>
+    <p>
+        <b>Interests</b><br>
+        Tell me about what interests you generally, so I can recommend places that fit you better.
+    </p>
+    <p>
+        <b>Budget</b><br>
+        Tell me what is the maximum of your budget you are willing to spend on this trip.
+    </p>
+    <p>
+        <b>Categories</b><br>
+        Select which of the given categories would best describe what you would like to explore in the location.
+    </p>
+    <p>
+        <b>Time</b><br>
+        Select how long your trip will be (in days).
+    </p>
+    <p>
+        <b>Upload an example image</b><br>
+        Select a photo of a place you like the look of and I will base my suggestions on places that are similar to that photo.
+    </p>`
+    }
 }
 document.addEventListener('DOMContentLoaded', function () {
     var infoButton = document.getElementById('info-button');
@@ -84,46 +113,21 @@ submitButton.addEventListener('click', function () {
                     console.log("ADDING CARD");
                     const locationCard = document.createElement('div');
                     locationCard.classList.add('location-card');
-
-                    // Image
-                    const imageDiv = document.createElement('div');
-                    imageDiv.classList.add("image");
-                    const image = document.createElement('img');
-                    image.src = recommended_list[i]["image"]; // Replace with the actual image URL
-                    image.alt = recommended_list[i]["LocationName"];
-                    imageDiv.appendChild(image);
-                    locationCard.appendChild(imageDiv);
-
-                    // Button
-                    const buttonDiv = document.createElement('div');
-                    buttonDiv.classList.add("button");
-                    const button = document.createElement('input');
-                    button.type = 'button';
-                    button.value = 'GENERATE PLAN';
-                    buttonDiv.appendChild(button);
-                    locationCard.appendChild(buttonDiv);
-
-                    // Content
-                    const contentDiv = document.createElement('div');
-                    contentDiv.classList.add("content");
-                    locationCard.appendChild(contentDiv);
-
-                    // Title
-                    const titleDiv = document.createElement('div');
-                    titleDiv.classList.add("title");
-                    const title = document.createElement('p');
-                    title.textContent = recommended_list[i]["LocationName"];
-                    titleDiv.appendChild(title);
-                    contentDiv.appendChild(titleDiv);
-
-                    // Description
-                    const descriptionDiv = document.createElement('div');
-                    descriptionDiv.classList.add("description");
-                    const description = document.createElement('p');
-                    description.textContent = recommended_list[i]["Description"];
-                    descriptionDiv.appendChild(description);
-                    contentDiv.appendChild(descriptionDiv);
-
+                    locationCard.innerHTML = `
+                    <div class="image">
+                        <img src="${recommended_list[i]["image"]}" alt="${recommended_list[i]["image"]}">
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <p><b>${recommended_list[i]["LocationName"]}</b></p>
+                        </div>
+                        <div class="description">
+                            <p>${recommended_list[i]["Description"]}</p>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button id="btn"><b>Choose</b></button>
+                    </div>`
                     container.appendChild(locationCard);
                 }
             })
