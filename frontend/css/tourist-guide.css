@@ -58,6 +58,21 @@ body {
     margin-right: 10px; 
     border-radius: 12px;
   }
+
+  .title {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    color: #0d3c52;
+}
+
+.title h3 {
+    margin: 0;
+}
   
   .day-card.right .content img {
     order: 1;
@@ -72,4 +87,28 @@ body {
     margin-left: 0;
   }
 
+
+  .side{
+    background-color: #91c8e4;
+    border: none;
+    cursor: pointer;
+    bottom: 10px;
+  }
+
+  .day-card.left #playBtn{
+    background-color: #91c8e4;
+    width: 30px;
+    position: relative;
+    margin-top: 40px;
+    margin-left: 18px;
+    
+  }
+
+  .day-card.right #playBtn{
+    background-color: #91c8e4;
+    width: 30px;
+    position: relative;
+    margin-top: 40px;
+    margin-left: 20px;
+  }
   
