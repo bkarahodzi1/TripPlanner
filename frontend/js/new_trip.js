@@ -11,7 +11,7 @@ function onLoadPage() {
 }
 let counter = 2;
 function imgSwitcher() {
-    if (counter == 6)
+    if (counter == 4)
         counter = 1;
     let image = document.getElementById('album');
     image.style.opacity = 0;
@@ -19,7 +19,7 @@ function imgSwitcher() {
         image.style.opacity = 1;
         image.src = `../img/random_images/background${counter}.jpg`;
         counter += 1;
-    }, 750);
+    }, 1000);
 }
 
 let submitButton = document.getElementById("submit_div").getElementsByTagName("button")[0];
