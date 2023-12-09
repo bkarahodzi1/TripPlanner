@@ -1,4 +1,36 @@
 recommended_list = [];
+
+function onSubmit(){
+    let loader = document.getElementById("loader");
+    let container = document.getElementById('container');
+
+
+    container.style.cssText=`
+    height: 100vh;
+    display: flex;
+    align-items: center; 
+    background-image: url("../img/random_images/background1.png");
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    `
+
+    loader.style.cssText = `
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    margin: -50px 0 0 -50px;
+    z-index: 1000;
+    `
+    
+}
+
+
 function onLoadPage() {
     let option = localStorage.getItem('selectedOption');
     if (option == 'guide') {
@@ -130,7 +162,31 @@ submitButton.addEventListener('click', function () {
                     </div>`
                     container.appendChild(locationCard);
                 }
-            })
+                let loader = document.getElementById("loader");
+                loader.style.cssText=`
+                width: 100px;
+                height: 100px;
+                position: absolute;
+                top: 50%;
+                left: 40%;
+                margin: -50px 0 0 -50px;
+                visibility:hidden;
+                `
+                let fullContainer = document.getElementById("container")
+                fullContainer.style.cssText = `
+                height: 100vh;
+                display: flex;
+                align-items: center; 
+                background-image: url("../img/random_images/background1.png");
+                -webkit-filter: blur(0px);
+                -moz-filter: blur(0px);
+                -o-filter: blur(0px);
+                -ms-filter: blur(0px);
+                filter: blur(0px);
+               
+                `
+            }
+                )
             .catch(error => {
                 console.error('Error:', error);
             });
