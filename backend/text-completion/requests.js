@@ -10,6 +10,20 @@ const openai = new OpenAI({
     apiKey: process.env.apiKey
 });
   
+function getTitleForDailyPlanImage(response) {
+    return new Promise((resolve, reject) => {
+        try {
+            let lokacije = [];
+            response.forEach(element => {
+                lokacije.push(element["title"]);
+            });
+            resolve(lokacije);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 export async function planTripFromCurrentLocation(location, trip_length, budget, categories=undefined){
     let content = `Provide me with a daily plan of my stay in location ${location}.
     My budget is ${budget} euros, I am staying for ${trip_length} days.`;
@@ -24,13 +38,20 @@ export async function planTripFromCurrentLocation(location, trip_length, budget,
         model: 'gpt-4',
         messages: [{ role: 'user', content: `${content}` }],
       });
-
+      let dailyPlans = ""
       try {
-        return JSON.parse(stream.choices[0].message.content.toString());
+        dailyPlans =  JSON.parse(stream.choices[0].message.content.toString());
       } catch (error) {
-        return {"error" : "Something went wrong! Try to change your parameters."};
+        return {"error" : "Something went wrong! Try to change your parameters"};
       }
-
+      
+      let planNames = getTitleForDailyPlanImage(dailyPlans)
+      let locationNames = await Promise.all([planNames])
+      const imageUrlsPromise = createImageFromTextSplash(locationNames.toString().split(','));
+      const [imageUrls] = await Promise.all([imageUrlsPromise]);
+      const locationPromise = appendUrlsToLocations(dailyPlans,imageUrls)
+      dailyPlans = await Promise.all([locationPromise])
+      return dailyPlans;
 }
 
 function getTitlesForImages(response) {
@@ -104,12 +125,32 @@ export async function planTrip(start_point,budget,categories,trip_length,locatio
     Make description more detailed, for every event where I go say how much time will I need to finish that event.
     Dont forget that total budget must not be over ${budget} euros. Include the transport price from city ${start_point} in that total price, so that
     full budget is expense for every day + transport.
-    Categories that I like are ${categories.join(', ')}.
-    `
+    Categories that I like are ${categories.join(', ')}.`
+    content+=" Here is how JSON response should look like, I will give you key and explanation " +
+    "Result must be in this form: array of days with keys day as int type, title, description, time,"
+    + " approximate_price as int type. If approximate price is free put it as 0. If all approximate prices added can't fit inside my budget or for some other reasons return JSON object with key error and value of your explanation."
+    + " DONT PUT ANYTHING THAT ISNT JSON FORMAT AS SPECIFIED. Dont put any characters that arent JSON. Dont put any keys that I haven't specified. Dont put your explanation in the end. Dont put any notes ONLY JSON."+
+    "Only put objects with keys day, title, description, time, approximate_price and dont put object with all costs!";
+    
     const stream = await openai.chat.completions.create({
         model: 'gpt-4',
         messages: [{ role: 'user', content: `${content}` }],
       });
-    return JSON.parse(stream.choices[0].message.content.toString());  
+      
+      let dailyPlans = ""
+      try {
+        console.log(stream.choices[0].message.content);
+        dailyPlans =  JSON.parse(stream.choices[0].message.content.toString());
+      } catch (error) {
+        return {"error" : "Something went wrong! Try to change your parameters"};
+      }
+
+      let planNames = getTitleForDailyPlanImage(dailyPlans)
+      let locationNames = await Promise.all([planNames])
+      const imageUrlsPromise = createImageFromTextSplash(locationNames.toString().split(','));
+      const [imageUrls] = await Promise.all([imageUrlsPromise]);
+      const locationPromise = appendUrlsToLocations(dailyPlans,imageUrls)
+      dailyPlans = await Promise.all([locationPromise])
+      return dailyPlans;
 }
 

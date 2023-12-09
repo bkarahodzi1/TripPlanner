@@ -6,10 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New trip</title>
     <link rel="stylesheet" href="../css/new_trip.css">
+    <link rel="stylesheet" href="../css/location-card.css">
 </head>
 
 <body>
     <div id="container">
+        <div id="info-button-container">
+            <div id="info-button">ℹ️</div>
+        </div>
+        <div id="info-text">
+            <p>
+                <b>Interests</b><br>
+                Tell me about what interests you generally, so I can recommend places that fit you better.
+            </p>
+            <p>
+                <b>Budget</b><br>
+                Tell me what is the maximum of your budget you are willing to spend on this trip.
+            </p>
+            <p>
+                <b>Categories</b><br>
+                Select which of the given categories would best describe what you would like to explore in the location.
+            </p>
+            <p>
+                <b>Time</b><br>
+                Select how long your trip will be (in days).
+            </p>
+            <p>
+                <b>Upload an example image</b><br>
+                Select a photo of a place you like the look of and I will base my suggestions on places that are similar to that photo.
+            </p>
+        </div>
         <div id="album_div">
             <img id="album" src="../img/random_images/background1.jpg" alt="placeholder">
         </div>
@@ -51,16 +77,29 @@
             </div>
             <div id="photo_div">
                 <form>
-                    <label>Select a file:</label><br>
+                    <label>Upload an example image :</label><br>
                     <input type="file" id="photo" name="photo" accept=".jpg, .jpeg, .png, .gif">
                 </form>
             </div>
             <div id="submit_div">
-                <button id="submit">GENERATE</button>
+                <button id="submit">Generate</button>
             </div>
         </div>
         <div id="card-container">
-
+            <div id="location-card">
+                <div class="image">
+                    <img src="../img/pocetna4.jpg" alt="Slika lokacije">
+                </div>
+                <div class="title">
+                    <p>Ime Grada</p>
+                </div>
+                <div class="description">
+                    <p>Ovo je jedan od ljepsih gradova, djadfhjfhdhf, sdjhjdhajd, sjdhdhafj, jdfhfjdhfj, fdasjfjdh</p>
+                </div>
+                <div class="button">
+                    <button id="Izaberi">IZABERI</button>
+                </div>
+            </div>
         </div>
     </div>
     
