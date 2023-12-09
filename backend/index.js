@@ -19,8 +19,10 @@ const port = 4000;
 app.use(cors(corsOptions))
 
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false, limit: '35mb', parameterLimit: 50000,
+}));
+app.use(bodyParser.json({limit: '35mb'}));
+
 
 app.use('', router);
 app.use('',homeRouter)
@@ -28,7 +30,7 @@ app.use('',homeRouter)
 //app.use('/auth',authRouter);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  
 });
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

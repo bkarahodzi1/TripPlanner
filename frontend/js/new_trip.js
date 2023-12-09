@@ -2,10 +2,37 @@ let recommended_list = [];
 let body = {}
 let trip_plan = []
 
+function unsetLoaderCss(loader,container){
+    loader.style.cssText = `
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    visibility:hidden;
+    display: none;
+    `
+   
+    container.style.cssText = `
+    height: 100vh;
+    display: flex;
+    align-items: center; 
+    background-image: url("../img/random_images/background1.png");
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -o-filter: blur(0px);
+    -ms-filter: blur(0px);
+    filter: blur(0px);
+   
+    `
+}
+
 function onSubmit() {
     let loader = document.getElementById("loader");
     let container = document.getElementById('container');
 
+    
 
     container.style.cssText = `
     height: 100vh;
@@ -116,14 +143,17 @@ function openPlan(btnDivRef) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            trip_plan = data["0"];
-            localStorage.setItem('tripPlan', trip_plan);
+            trip_plan = data;
+            trip_plan["duration"] = body["trip_length"];
+            localStorage.setItem("tripPlan", JSON.stringify(trip_plan["0"]));
+            window.location.href = '/html/tourist-guide.html';
         })  
         .catch(error => {
             console.error('Error:', error);
         });
 }
+
+
 
 submitButton.addEventListener('click', function () {
     const url = 'http://localhost:4000/locations';
@@ -142,19 +172,95 @@ submitButton.addEventListener('click', function () {
 
         const input = document.getElementById('photo');
         const file = input.files[0];
+        const beforeString = "data:image/jpeg;base64,";
+        let base64String = "";
+
+        
+
 
         if (file) {
             const reader = new FileReader();
-
-            reader.onload = function (e) {
-                body["base64"] = e.target.result.split(',')[1];
-                // popravit upload slike
+            reader.onload = () =>{
+                base64String = btoa(reader.result);
+                
+                body["base64"] = beforeString+base64String;
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Response:', data);
+                        if ("error" in data) {
+                            alert(data["error"]);
+                            let fullContainer = document.getElementById("container");
+                            let loader = document.getElementById("loader");
+                            unsetLoaderCss(loader,fullContainer)
+                           
+                           
+                            return;
+                        }
+                        recommended_list = data["0"];
+                        console.log("VELICINA JE " + recommended_list.length)
+                        let container = document.getElementById("card-container");
+                        let images = document.getElementById('album');
+                        images.style.display = "none";
+                        container.innerHTML = '';
+                        let max = 3;
+                        if (recommended_list.length>3){
+                            max=3;
+                        }
+                        else if (recommended_list.length<3){
+                            max=recommended_list.length;
+                        }
+                        let loader = document.getElementById("loader");
+                        let fullContainer = document.getElementById("container")
+                        for (let i = 0; i < max; i++) {
+                            console.log("ADDING CARD");
+                            const locationCard = document.createElement('div');
+                            locationCard.classList.add('location-card');
+                            if (recommended_list[i]["LocationName"]==undefined||recommended_list[i]["Description"]==undefined){
+                                alert("Something went wrong, try again!");
+                                unsetLoaderCss(loader,fullContainer)
+                                return
+                            }
+                            locationCard.innerHTML = `
+                            <div class="image">
+                                <img src="${recommended_list[i]["image"]}" alt="${recommended_list[i]["image"]}">
+                            </div>
+                            <div class="content">
+                                <div class="title">
+                                    <p><b>${recommended_list[i]["LocationName"]}</b></p>
+                                </div>
+                                <div class="description">
+                                    <p>${recommended_list[i]["Description"]}</p>
+                                </div>
+                            </div>
+                            <div class="button">
+                                <button class="btn" onclick=openPlan(this) id="${i}"><b>Choose</b></button>
+                            </div>`
+                            container.appendChild(locationCard);
+                        }
+                        console.log("BASE64" + body["base64"])
+                        unsetLoaderCss(loader, fullContainer);
+                        
+                    }
+                    )
+                    .catch(error => {
+                        console.log("ERROR");
+                        
+                        
+                    });
             };
 
-            reader.readAsDataURL(file);
+            reader.readAsBinaryString(file);
+            
         }
-
-        console.log(body);
+        
+       
         fetch(url, {
             method: 'POST',
             headers: {
@@ -167,14 +273,37 @@ submitButton.addEventListener('click', function () {
                 console.log('Response:', data);
                 if ("error" in data) {
                     alert(data["error"]);
+                    let fullContainer = document.getElementById("container");
+                    let loader = document.getElementById("loader");
+                    unsetLoaderCss(loader,fullContainer)
+                   
+                   
                     return;
                 }
                 recommended_list = data["0"];
+                console.log("VELICINA JE " + recommended_list.length)
                 let container = document.getElementById("card-container");
-                for (let i = 0; i < recommended_list.length; i++) {
+                let images = document.getElementById('album');
+                images.style.display = "none";
+                container.innerHTML = '';
+                let max = 3;
+                if (recommended_list.length>3){
+                    max=3;
+                }
+                else if (recommended_list.length<3){
+                    max=recommended_list.length;
+                }
+                let loader = document.getElementById("loader");
+                let fullContainer = document.getElementById("container")
+                for (let i = 0; i < max; i++) {
                     console.log("ADDING CARD");
                     const locationCard = document.createElement('div');
                     locationCard.classList.add('location-card');
+                    if (recommended_list[i]["LocationName"]==undefined||recommended_list[i]["Description"]==undefined){
+                        alert("Something went wrong, try again!");
+                        unsetLoaderCss(loader,fullContainer)
+                        return
+                    }
                     locationCard.innerHTML = `
                     <div class="image">
                         <img src="${recommended_list[i]["image"]}" alt="${recommended_list[i]["image"]}">
@@ -192,35 +321,15 @@ submitButton.addEventListener('click', function () {
                     </div>`
                     container.appendChild(locationCard);
                 }
-                let loader = document.getElementById("loader");
-                loader.style.cssText = `
-                width: 100px;
-                height: 100px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                margin: -50px 0 0 -50px;
-                visibility:hidden;
-                display: none;
-                `
-                let fullContainer = document.getElementById("container")
-                fullContainer.style.cssText = `
-                height: 100vh;
-                display: flex;
-                align-items: center; 
-               
-                background-image: url("../img/random_images/background1.png");
-                -webkit-filter: blur(0px);
-                -moz-filter: blur(0px);
-                -o-filter: blur(0px);
-                -ms-filter: blur(0px);
-                filter: blur(0px);
-               
-                `
+                
+                unsetLoaderCss(loader, fullContainer);
+                
             }
             )
             .catch(error => {
+                console.log("ERROR");
                 console.error('Error:', error);
+                
             });
     } else if (option == "guide") {
 
