@@ -130,6 +130,34 @@ function imgSwitcher() {
 let submitButton = document.getElementById("submit_div").getElementsByTagName("button")[0];
 
 function openPlan(btnDivRef) {
+    let loader = document.getElementById("loader");
+    let container = document.getElementById('container');
+
+    
+
+    container.style.cssText = `
+    height: 100vh;
+    display: flex;
+    align-items: center; 
+    background-image: url("../img/random_images/background1.png");
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    `
+
+    loader.style.cssText = `
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 46%;
+    margin: -50px 0 0 -50px;
+    z-index: 1000;
+    `
     console.log("CHOOSE BUTTON CLICKED");
     const url = 'http://localhost:4000/plan';
     body["location"] = recommended_list[btnDivRef.id]["LocationName"];
@@ -146,6 +174,8 @@ function openPlan(btnDivRef) {
             trip_plan = data;
             trip_plan["duration"] = body["trip_length"];
             localStorage.setItem("tripPlan", JSON.stringify(trip_plan["0"]));
+            let fullContainer = document.getElementById("container");
+            unsetLoaderCss(loader,fullContainer);
             window.location.href = '/html/tourist-guide.html';
         })
         .catch(error => {
@@ -363,6 +393,51 @@ submitButton.addEventListener('click', function () {
             });
     }
 });
+
+function generateBasedOnImage(){
+    let selectionDiv = document.getElementById("selection_div");
+    let form = document.getElementById("form");
+    selectionDiv.style.display = "none";
+    form.style.display = "block";
+    let startPoint_div = document.getElementById("startPoint_div");
+    let interests_div = document.getElementById("interests_div");
+    let budget_div = document.getElementById("budget_div");
+    let categories_div = document.getElementById("categories_div");
+    let time_div = document.getElementById("time_div");
+    let photo_div = document.getElementById("photo_div");
+    photo_div.style.display = "block";
+    startPoint_div.style.display = "none";
+    interests_div.style.display = "none";
+    budget_div.style.display = "none";
+    categories_div.style.display = "none";
+    time_div.style.display = "none";
+}
+
+function generateBasedOnParams(){
+    let selectionDiv = document.getElementById("selection_div");
+    let form = document.getElementById("form");
+    let startPoint_div = document.getElementById("startPoint_div");
+    let interests_div = document.getElementById("interests_div");
+    let budget_div = document.getElementById("budget_div");
+    let categories_div = document.getElementById("categories_div");
+    let time_div = document.getElementById("time_div");
+    selectionDiv.style.display = "none";
+    form.style.display = "block";
+    let photo_div = document.getElementById("photo_div");
+    photo_div.style.display = "none";
+    startPoint_div.style.display = "block";
+    interests_div.style.display = "block";
+    budget_div.style.display = "block";
+    categories_div.style.display = "block";
+    time_div.style.display = "block";
+}
+
+function onReturn(){
+    let selectionDiv = document.getElementById("selection_div");
+    let form = document.getElementById("form");
+    selectionDiv.style.display = "block";
+    form.style.display = "none";
+}
 
 window.onLoad = onLoadPage();
 setInterval(imgSwitcher, 4000);

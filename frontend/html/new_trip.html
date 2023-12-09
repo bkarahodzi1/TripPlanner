@@ -53,7 +53,7 @@
                 Tell me about what interests you generally, so I can recommend places that fit you better.
             </p>
             <p>
-                <b>Budget</b><br>
+                <b>Budget (in euros)</b><br>
                 Tell me what is the maximum of your budget you are willing to spend on this trip in euros.
             </p>
             <p>
@@ -120,10 +120,15 @@
             </div>
             <div id="submit_div">
                 <button  id="submit" onclick="onSubmit()">Generate</button>
+                <button  id="return" onclick="onReturn()">Return</button>
             </div>
         </div>
-            <div id="card-container">
+        <div id = "selection_div">
+            <h1 id="header">Generate based on</h1>
+            <button id = "onImgBtn" onclick="generateBasedOnImage()">Image</button>
+            <button id = "onParamsBtn" onclick="generateBasedOnParams()">Paramaters</button>
         </div>
+        <div id="card-container"></div>
     </div>
 
     <script src="../js/new_trip.js"></script>
