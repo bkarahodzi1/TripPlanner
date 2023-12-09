@@ -39,87 +39,100 @@ let submitButton = document.getElementById("submit_div").getElementsByTagName("b
 
 submitButton.addEventListener('click', function () {
     const url = 'http://localhost:4000/locations';
+    let option = localStorage.getItem('selectedOption');
 
-    const body = {};
-    body["start_point"] = document.getElementById("startPoint_div").getElementsByTagName("textarea")[0].value;
-    body["interests"] = document.getElementById("interests_div").getElementsByTagName("textarea")[0].value;
-    body["budget"] = document.getElementById("budget_div").getElementsByTagName("textarea")[0].value;
-    body["categories"] = [];
-    for (let cat of document.getElementById("categories_div").getElementsByTagName("input"))
-        if (cat.checked)
-            body["categories"].push(cat.value);
-    body["trip_length"] = document.getElementById("time_div").getElementsByTagName("input")[0].value;
+    if (option == "new") {
+        const body = {};
+        body["start_point"] = document.getElementById("startPoint_div").getElementsByTagName("textarea")[0].value;
+        body["interests"] = document.getElementById("interests_div").getElementsByTagName("textarea")[0].value;
+        body["budget"] = document.getElementById("budget_div").getElementsByTagName("textarea")[0].value;
+        body["categories"] = [];
+        for (let cat of document.getElementById("categories_div").getElementsByTagName("input"))
+            if (cat.checked)
+                body["categories"].push(cat.value);
+        body["trip_length"] = document.getElementById("time_div").getElementsByTagName("input")[0].value;
 
-    const input = document.getElementById('photo');
-    const file = input.files[0];
+        const input = document.getElementById('photo');
+        const file = input.files[0];
 
-    if (file) {
-        const reader = new FileReader();
+        if (file) {
+            const reader = new FileReader();
 
-        reader.onload = function (e) {
-            body["base64"] = e.target.result.split(',')[1];
-            // popravit upload slike
-        };
+            reader.onload = function (e) {
+                body["base64"] = e.target.result.split(',')[1];
+                // popravit upload slike
+            };
 
-        reader.readAsDataURL(file);
-    }
+            reader.readAsDataURL(file);
+        }
 
-    console.log(body);
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Response:', data);
-
-            recommended_list = data;
-            let container = document.getElementById("card-container");
-            for (let i = 0; i < data.length; i++) {
-                console.log("ADDING CARD");
-                const locationCard = document.createElement('div');
-                locationCard.classList.add('location-card');
-
-                // Image
-                const imageDiv = document.createElement('div');
-                const image = document.createElement('img');
-                image.src = data[i]["image"]; // Replace with the actual image URL
-                image.alt = data[i]["LocationName"];
-                imageDiv.appendChild(image);
-                locationCard.appendChild(imageDiv);
-
-                // Button
-                const buttonDiv = document.createElement('div');
-                const button = document.createElement('input');
-                button.type = 'button';
-                button.value = 'GENERATE PLAN';
-                buttonDiv.appendChild(button);
-                locationCard.appendChild(buttonDiv);
-
-                // Title
-                const titleDiv = document.createElement('div');
-                const title = document.createElement('p');
-                title.textContent = data[i]["LocationName"];
-                titleDiv.appendChild(title);
-                locationCard.appendChild(titleDiv);
-
-                // Description
-                const descriptionDiv = document.createElement('div');
-                const description = document.createElement('p');
-                description.textContent = data[i]["Description"];
-                descriptionDiv.appendChild(description);
-                locationCard.appendChild(descriptionDiv);
-
-                container.appendChild(locationCard);
-            }
+        console.log(body);
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
         })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response:', data);
 
+                recommended_list = data["0"];
+                let container = document.getElementById("card-container");
+                for (let i = 0; i < recommended_list.length; i++) {
+                    console.log("ADDING CARD");
+                    const locationCard = document.createElement('div');
+                    locationCard.classList.add('location-card');
+
+                    // Image
+                    const imageDiv = document.createElement('div');
+                    imageDiv.classList.add("image");
+                    const image = document.createElement('img');
+                    image.src = recommended_list[i]["image"]; // Replace with the actual image URL
+                    image.alt = recommended_list[i]["LocationName"];
+                    imageDiv.appendChild(image);
+                    locationCard.appendChild(imageDiv);
+
+                    // Button
+                    const buttonDiv = document.createElement('div');
+                    buttonDiv.classList.add("button");
+                    const button = document.createElement('input');
+                    button.type = 'button';
+                    button.value = 'GENERATE PLAN';
+                    buttonDiv.appendChild(button);
+                    locationCard.appendChild(buttonDiv);
+
+                    // Content
+                    const contentDiv = document.createElement('div');
+                    contentDiv.classList.add("content");
+                    locationCard.appendChild(contentDiv);
+
+                    // Title
+                    const titleDiv = document.createElement('div');
+                    titleDiv.classList.add("title");
+                    const title = document.createElement('p');
+                    title.textContent = recommended_list[i]["LocationName"];
+                    titleDiv.appendChild(title);
+                    contentDiv.appendChild(titleDiv);
+
+                    // Description
+                    const descriptionDiv = document.createElement('div');
+                    descriptionDiv.classList.add("description");
+                    const description = document.createElement('p');
+                    description.textContent = recommended_list[i]["Description"];
+                    descriptionDiv.appendChild(description);
+                    contentDiv.appendChild(descriptionDiv);
+
+                    container.appendChild(locationCard);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    } else if (option == "") {
+
+    }
 });
 
 window.onLoad = onLoadPage();
