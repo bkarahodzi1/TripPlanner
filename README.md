@@ -56,7 +56,7 @@ To run the TripPlanner Web Application locally, follow these steps:
     node index.js
     ```
 
-6. Access the application in your browser at `http://localhost:3000/home`.
+6. Access the application in your browser at `http://localhost:4000/home`.
 
 
 ## Acknowledgments

@@ -60,7 +60,9 @@ function onSubmit() {
 
 }
 
-
+function handleButtonText(){
+    document.getElementById("submit").textContent = "Generate";
+}
 function onLoadPage() {
     let option = localStorage.getItem('selectedOption');
     if (option == 'guide') {
@@ -141,9 +143,10 @@ function openPlan(btnDivRef) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            trip_plan = data["0"];
-            localStorage.setItem('tripPlan', trip_plan);
+            trip_plan = data;
+            trip_plan["duration"] = body["trip_length"];
+            localStorage.setItem("tripPlan", JSON.stringify(trip_plan["0"]));
+            window.location.href = '/html/tourist-guide.html';
         })  
         .catch(error => {
             console.error('Error:', error);
@@ -155,7 +158,7 @@ function openPlan(btnDivRef) {
 submitButton.addEventListener('click', function () {
     const url = 'http://localhost:4000/locations';
     let option = localStorage.getItem('selectedOption');
-
+    document.getElementById("submit").textContent = "Regenerate";
     if (option == "new") {
         body = {};
         body["start_point"] = document.getElementById("startPoint_div").getElementsByTagName("textarea")[0].value;
@@ -204,6 +207,8 @@ submitButton.addEventListener('click', function () {
                 recommended_list = data["0"];
                 console.log("VELICINA JE " + recommended_list.length)
                 let container = document.getElementById("card-container");
+                let images = document.getElementById('album');
+                images.style.display = "none";
                 container.innerHTML = '';
                 let max = 3;
                 if (recommended_list.length>3){

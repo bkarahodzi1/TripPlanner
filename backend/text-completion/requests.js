@@ -83,7 +83,7 @@ function appendUrlsToLocations(locations, imageUrls) {
 }
 
 
-export async function getLocations(start_point, interests, budget, categories, trip_length, image_description=null) {
+export async function getLocations(start_point, interests, budget, categories, trip_length, image_description=null, previouse_response=null) {
     let content=`Give me 3 locations for my trip.
     My start point is from ${start_point}. My interests include ${interests}.
     My budget is ${budget} euros in cost include all transportation costs, accomodation and all other expenses.
