@@ -396,10 +396,6 @@ submitButton.addEventListener('click', function () {
     }
 });
 
-
-    }
-});
-
 function goHome(){
     window.location.href = "http://localhost:4000/home";
 }
