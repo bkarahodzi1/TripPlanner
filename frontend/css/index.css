@@ -22,6 +22,8 @@ body {
     display: flex;
     background-image: url('../img/pozadina5.png');
     background-position: 0px 80%;
+    background-attachment: fixed;
+    background-size: cover;
     flex-direction: column;
     justify-content: center;
     align-items: center; 

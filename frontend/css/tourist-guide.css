@@ -1,0 +1,75 @@
+body {
+    font-family:Cambria;
+    margin: 0;
+    padding: 0;
+    background-color: #e1cde9;
+  }
+  
+  .day-card {
+    max-width: 1200px;
+    height: 170px;
+    margin: 30px auto;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    text-wrap: wrap;
+  }
+  
+  .left, .right {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  .right {
+    flex-direction: row-reverse;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #0d3c52;
+    width: 100%;
+  }
+  
+  h2 {
+    background-color: #91c8e4;
+    color: #0d3c52;
+    padding: 10px;
+    margin: 0;
+  }
+  
+  .content {
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  .left img {
+    max-width: 50%;
+    height: auto;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 12px; 
+  }
+  
+  .right img {
+    max-width: 50%;
+    height: auto;
+    margin-right: 10px; 
+    border-radius: 12px;
+  }
+  
+  .day-card.right .content img {
+    order: 1;
+  }
+  
+  .day-card.left .content p,
+  .day-card.right .content p {
+    margin-right: auto;
+  }
+  
+  .day-card.right .content p {
+    margin-left: 0;
+  }
+
+  

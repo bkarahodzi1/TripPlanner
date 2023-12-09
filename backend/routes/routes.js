@@ -1,13 +1,10 @@
 import  express  from "express";
 import  fs  from 'fs';
 
-import { getLocations, planTrip } from "../text-completion/requests.js";
+import { getLocations, planTrip, planTripFromCurrentLocation } from "../text-completion/requests.js";
 import bodyParser from 'body-parser';
-import { getEventListeners } from "events";
 import { generateText } from "../image recognition/textGeneration.js";
-import { basename } from "path";
 import dotenv from 'dotenv'
-import { send } from "process";
 
 dotenv.config();
 
@@ -16,15 +13,11 @@ const router = express.Router();
 
 
 
-router.get('https://api.unsplash.com/search/photos/', async function(req,res){
-
-    req.header("Authorization: " + process.env.splashApi )
-    
-    
-
-
-});
-
+router.post("/tguide", async (req,res)=>{
+    let body = req.body;
+    let plan = await planTripFromCurrentLocation(body['location'],body['trip_length'],body['budget'],body['categories']);
+    res.send(plan);
+})
 
 router.post('/locations', async (req,res)=>{
     let base64 = req.body['base64']
