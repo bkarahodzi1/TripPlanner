@@ -15,6 +15,7 @@ label{
     display: flex;
     align-items: center; 
     background-image: url("../img/random_images/background1.png");
+    
 }
 
 #form {
@@ -137,7 +138,7 @@ label{
     top: 50px;
     right: 50px;
     opacity: 0;
-    z-index: 999; /* Ensure the button is above other content */
+    z-index: -1; /* Ensure the button is above other content */
 }
 
 #info-button {
