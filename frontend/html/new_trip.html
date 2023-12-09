@@ -49,8 +49,8 @@
                 Tell me about what interests you generally, so I can recommend places that fit you better.
             </p>
             <p>
-                <b>Budget</b><br>
-                Tell me what is the maximum of your budget you are willing to spend on this trip.
+                <b>Budget (in euros)</b><br>
+                Tell me what is the maximum of your budget you are willing to spend on this trip in euros
             </p>
             <p>
                 <b>Categories</b><br>
@@ -75,47 +75,47 @@
             </div>
             <div id="interests_div">
                 <label>Interests:</label><br>
-                <textarea id="interests" rows="4" placeholder="Tell me about your interests." oninput="handleButtonText()"></textarea>
+                <textarea id="interests" rows="4" placeholder="Tell me about your interests."></textarea>
             </div>
             <div id="budget_div">
                 <label>Budget:</label><br>
-                <textarea id="budget" rows="2" placeholder="What is your maximum budget?" oninput="handleButtonText()"></textarea>
+                <textarea id="budget" rows="2" placeholder="What is your maximum budget?"></textarea>
             </div>
             <div id="categories_div">
                 <label>Categories:</label><br>
                 <label>
-                    <input type="checkbox" name="selectedFields[]" value="history" oninput="handleButtonText()"> History
+                    <input type="checkbox" name="selectedFields[]" value="history"> History
                 </label>
 
                 <label>
-                    <input type="checkbox" name="selectedFields[]" value="art" oninput="handleButtonText()"> Art
+                    <input type="checkbox" name="selectedFields[]" value="art"> Art
                 </label>
                 <label>
-                    <input type="checkbox" name="selectedFields[]" value="architecture" oninput="handleButtonText()"> Architecture
+                    <input type="checkbox" name="selectedFields[]" value="architecture"> Architecture
                 </label>
                 <label>
-                    <input type="checkbox" name="selectedFields[]" value="nature" oninput="handleButtonText()"> Nature
+                    <input type="checkbox" name="selectedFields[]" value="nature"> Nature
                 </label>
                 <label>
-                    <input type="checkbox" name="selectedFields[]" value="science" oninput="handleButtonText()"> Science
+                    <input type="checkbox" name="selectedFields[]" value="science"> Science
                 </label>
             </div>
             <div id="time_div">
                 <label>Time (in days):</label><br>
-                <input type="number" id="time" min="1" placeholder="1" oninput="handleButtonText()">
+                <input type="number" id="time" min="1" placeholder="1">
             </div>
             <div id="photo_div">
                 <form>
                     <label>Upload an example image :</label><br>
-                    <input type="file" id="photo" name="photo" accept=".jpg, .jpeg, .png, .gif" oninput="handleButtonText()">
+                    <input type="file" id="photo" name="photo" accept=".jpg, .jpeg, .png, .gif">
                 </form>
             </div>
             <div id="submit_div">
-                <button id="submit" onclick="onSubmit()">Generate</button>
+                <button  id="submit" onclick="onSubmit()">Generate</button>
             </div>
         </div>
             <div id="card-container">
-            </div>
+        </div>
     </div>
 
     <script src="../js/new_trip.js"></script>
