@@ -102,7 +102,6 @@ let submitButton = document.getElementById("submit_div").getElementsByTagName("b
 submitButton.addEventListener('click', function () {
     const url = 'http://localhost:4000/locations';
     let option = localStorage.getItem('selectedOption');
-
     if (option == "new") {
         const body = {};
         body["start_point"] = document.getElementById("startPoint_div").getElementsByTagName("textarea")[0].value;
@@ -142,6 +141,8 @@ submitButton.addEventListener('click', function () {
 
                 recommended_list = data["0"];
                 let container = document.getElementById("card-container");
+                let images = document.getElementById('album');
+                images.style.display = "none";
                 for (let i = 0; i < recommended_list.length; i++) {
                     console.log("ADDING CARD");
                     const locationCard = document.createElement('div');

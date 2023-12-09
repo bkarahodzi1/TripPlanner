@@ -167,8 +167,9 @@ label{
 }
 #card-container{
     position: fixed;
-    top:0;
-    left:0;
     z-index: 10;
     width: 50%;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
 }
