@@ -172,6 +172,8 @@ submitButton.addEventListener('click', function () {
                 }
                 recommended_list = data["0"];
                 let container = document.getElementById("card-container");
+                let images = document.getElementById('album');
+                images.style.display = "none";
                 for (let i = 0; i < recommended_list.length; i++) {
                     console.log("ADDING CARD");
                     const locationCard = document.createElement('div');
