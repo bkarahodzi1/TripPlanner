@@ -13,15 +13,6 @@ const router = express.Router();
 
 
 
-router.get('https://api.unsplash.com/search/photos/', async function(req,res){
-
-    req.header("Authorization: " + process.env.splashApi )
-    
-    
-
-
-});
-
 router.post("/tguide", async (req,res)=>{
     let body = req.body;
     let plan = await planTripFromCurrentLocation(body['location'],body['trip_length'],body['budget'],body['categories']);

@@ -10,41 +10,20 @@ import axios from 'axios'
 import { error } from 'console';
 const openai = new OpenAI({apiKey : process.env.apiKey});
 
-export async function createImageFromTextSplash(cityTitles){
-
-    
-    let data = []
-    
-    
-   let promises =  cityTitles.map(element => {
-        let url = `https://api.unsplash.com/search/photos/?query=\"${element}\"`
-        return axios.get(url, {headers: {'Authorization' : process.env.splashApi}})
-        .then(response=>{
-            
-            data.push(response.data.results[0].urls.small);
-            
-           
-        })
-        .catch(error=>{
-            throw error;
+export function createImageFromTextSplash(cityTitles) {
+    return new Promise((resolve, reject) => {
+        const promises = cityTitles.map(element => {
+            let url = `https://api.unsplash.com/search/photos/?query=\"${element}\"`;
+            return axios.get(url, { headers: { 'Authorization': process.env.splashApi } })
+                .then(response => response.data.results[0].urls.small)
+                .catch(error => Promise.reject(error));
         });
 
+        Promise.all(promises)
+            .then(images => resolve(images))
+            .catch(error => reject(error));
     });
-    
-    Promise.all(promises)
-    .then(()=>{
-        console.log(data);
-        return data;
-    })
-   
-   
-
 }
-
-
-
-
-
 
 
 
@@ -82,6 +61,3 @@ export async function createImageFromText(cityTitles){
 
       return image1,image2,image3;
 }
-
-
- let rez = await createImageFromTextSplash(["Sarajevo", "Rome", "Paris"]);

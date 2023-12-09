@@ -2,10 +2,10 @@ import OpenAI from "openai";
 import dotenv from 'dotenv'
 import { endianness } from "os";
 import { start } from "repl";
-
+import { createImageFromTextSplash } from "../image generation/image-generation.js";
+import { create } from "domain";
 dotenv.config();
 
-console.log(process.env.apiKey)
 const openai = new OpenAI({
     apiKey: process.env.apiKey
 });
@@ -33,9 +33,37 @@ export async function planTripFromCurrentLocation(location, trip_length, budget,
 
 }
 
+function getTitlesForImages(response) {
+    return new Promise((resolve, reject) => {
+        try {
+            let lokacije = [];
+            response.forEach(element => {
+                lokacije.push(element["LocationName"]);
+            });
+            resolve(lokacije);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+function appendUrlsToLocations(locations, imageUrls) {
+   
+    return new Promise((resolve, reject) => {
+        try {
+            for (let i = 0; i < locations.length; i++) {
+                locations[i] = { ...locations[i], image: imageUrls[i] };
+            }
+            resolve(locations);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 
 export async function getLocations(start_point, interests, budget, categories, trip_length, image_description=null) {
-    let content=`You should give me up to 3 suggested locations for my trip.
+    let content=`Give me 3 locations for my trip.
     My start point is from ${start_point}. My interests include ${interests}.
     My budget is ${budget} euros in cost include all transportation costs, accomodation and all other expenses.
     Things that I like are ${categories.join(', ')}.
@@ -44,17 +72,28 @@ export async function getLocations(start_point, interests, budget, categories, t
     if (image_description != undefined){
         content += `Also, this is a description of how the locations should look like: ${image_description}`
     }
-    content+= 'If start point isnt any place in world then return JSON with key error and value of your explanation. If this is financially possible provide response as Locations list of JSON objects with keys LocationName' +
-    'and Description dont put anything else than this, if it is limited then return only json object with key error value of your explanation.'; 
+    content+= "I want you to give me list of locations with name of the location and description of that location. Result is mandatory to be in JSON in this form: array of Locations with keys LocationName"+
+    + ", Description.If start point isnt any place in world then return JSON with key error and value of your explanation. If costs of this trip added exceed my budget return JSON object"+
+    " with key error and value of explanation. DONT PUT ANYTHING ELSE THAT ISNT JSON FORMAT AS SPECIFIED"; 
     const stream = await openai.chat.completions.create({
         model: 'gpt-4',
         messages: [{ role: 'user', content: `${content}` }],
       });
+      let locations = ""
     try {
-        return JSON.parse(stream.choices[0].message.content.toString());
-    }catch (error) {
-        return {error : "We can't give you any locations, try to change parameters of your trip."}
+        locations = JSON.parse(stream.choices[0].message.content.toString())
+    } catch (error) { 
+    return {error : "We can't give you any locations, try to change parameters of your trip."}
     }
+
+    let locationNamesPromise = getTitlesForImages(locations)
+    let locationNames = await Promise.all([locationNamesPromise])
+    const imageUrlsPromise = createImageFromTextSplash(locationNames.toString().split(','));
+    const [imageUrls] = await Promise.all([imageUrlsPromise]);
+    const locationPromise = appendUrlsToLocations(locations,imageUrls)
+    locations = await Promise.all([locationPromise])
+    return locations;
+    
 }
 
 export async function planTrip(start_point,budget,categories,trip_length,location) {
