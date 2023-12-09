@@ -33,7 +33,9 @@ function onSubmit() {
 
 }
 
-
+function handleButtonText(){
+    document.getElementById("submit").textContent = "Generate";
+}
 function onLoadPage() {
     let option = localStorage.getItem('selectedOption');
     if (option == 'guide') {
@@ -126,7 +128,7 @@ function openPlan(btnDivRef) {
 submitButton.addEventListener('click', function () {
     const url = 'http://localhost:4000/locations';
     let option = localStorage.getItem('selectedOption');
-
+    document.getElementById("submit").textContent = "Regenerate";
     if (option == "new") {
         body = {};
         body["start_point"] = document.getElementById("startPoint_div").getElementsByTagName("textarea")[0].value;
