@@ -13,6 +13,7 @@ body {
     display: flex;
     align-items: center; 
     background-image: url("../img/random_images/background1.png");
+    background-size: cover;
 }
 
 #form {
