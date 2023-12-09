@@ -1,5 +1,6 @@
+import {text2speech} from '../../backend/text2speech/text2speech.js'
+
 window.onload = function () {
-    console.log("UŠOOO");
     console.log(localStorage.getItem("tripPlan"));
     let container = document.getElementById("day-container");
     let trip_plan = JSON.parse(localStorage.getItem("tripPlan"));
@@ -17,3 +18,12 @@ window.onload = function () {
         </div>`;
     }
 };
+
+
+
+function audioRequest(){
+    let audioButton = document.getElementById("play-button");
+
+    
+
+}
