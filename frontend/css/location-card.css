@@ -56,7 +56,7 @@
     padding: 10px;
 }
 
-.location-card .button #btn{
+.location-card .button .btn{
     background-color: #91c8e4;
     font-family:Cambria;
     color: #0d3c52;
@@ -67,7 +67,7 @@
     cursor: pointer;
 }
 
-.location-card .button #btn:hover {
+.location-card .button .btn:hover {
     background-color: #9f948e;
 }
 
