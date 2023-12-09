@@ -65,6 +65,7 @@ body {
     background-attachment: fixed;
     position: relative;
     overflow: hidden;
+    transition: opacity 1s ease-out;
 }
 #photo{
     justify-content: center;
@@ -83,11 +84,11 @@ body {
 }
 #time{
     height: 20px;
+    font-size: 120%;
 }
 #startPoint::placeholder,
 #interests::placeholder,
-#budget::placeholder,
-#time::placeholder{
+#budget::placeholder{
     font-size: 130%;
 }
 #interests,#startPoint,#budget{
@@ -106,5 +107,16 @@ body {
     border-radius: 12px;
     cursor: pointer;
     margin-top: 20px;
-    background-color:aliceblue;
+    background-color:#f0f8ff;
+}
+#submit:hover{
+    font-family:Cambria;
+    color: #0d3c52;
+    padding: 13px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color:#BDE0FF;
 }
