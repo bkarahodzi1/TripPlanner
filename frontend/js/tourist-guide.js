@@ -1,4 +1,3 @@
-import {text2speech} from '../../backend/text2speech/text2speech.js'
 
 window.onload = function () {
     console.log(localStorage.getItem("tripPlan"));
@@ -24,6 +23,6 @@ window.onload = function () {
 function audioRequest(){
     let audioButton = document.getElementById("play-button");
 
-    
+
 
 }

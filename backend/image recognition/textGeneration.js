@@ -26,6 +26,7 @@ export async function generateText(base64) {
       },
     ],
   });
+  console.log(response.choices[0]);
   return response.choices[0];
 }
 
