@@ -1,32 +1,63 @@
+import { create } from 'domain';
 import dotenv from 'dotenv'
+import { response } from 'express';
 dotenv.config();
-
-
+import express from 'express';
+import http from 'http';
 import OpenAI from "openai";
 import { buffer } from 'stream/consumers';
-
+import axios from 'axios'
+import { error } from 'console';
 const openai = new OpenAI({apiKey : process.env.apiKey});
+
+export function createImageFromTextSplash(cityTitles) {
+    return new Promise((resolve, reject) => {
+        const promises = cityTitles.map(element => {
+            let url = `https://api.unsplash.com/search/photos/?query=\"${element}\"`;
+            return axios.get(url, { headers: { 'Authorization': process.env.splashApi } })
+                .then(response => response.data.results[0].urls.small)
+                .catch(error => Promise.reject(error));
+        });
+
+        Promise.all(promises)
+            .then(images => resolve(images))
+            .catch(error => reject(error));
+    });
+}
+
+
+
 
 
 export async function createImageFromText(cityTitles){
 
-    let imgPrompt = "Give me three images based on theese names of cities";
-    let i = 1;
-    cityTitles.forEach(element => {
-        
-        imgPrompt += `${i}. ${element}`;
-    });
-
-    const response = await openai.createImage({
+    console.log(cityTitles);
+    
+    const response = await openai.images.generate({
         model: "dall-e-3",
-        prompt: imgPrompt,
-        n: 3,
-        size: "1024x1024",
-        response_format : "b64_json"
+        prompt: "Picture of " + cityTitles[0],
+        n: 1,
+        size: "1024x1024"
       });
-      image_url = response.data.data[0].url;
-
       
+      image1 = response1.data[0].url;
 
-      return image_url;
+      const response2 = await openai.images.generate({
+        model: "dall-e-3",
+        prompt: "Picture of " + cityTitles[1],
+        n: 1,
+        size: "1024x1024"
+      });
+      image2 = response2.data[0].url;
+
+      const response3 = await openai.images.generate({
+        model: "dall-e-3",
+        prompt: "Picture of " + cityTitles[2],
+        n: 1,
+        size: "1024x1024"
+      });
+      image3 = response3.data[0].url;
+
+
+      return image1,image2,image3;
 }
