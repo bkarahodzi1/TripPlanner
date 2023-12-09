@@ -1,6 +1,5 @@
 import  express  from "express";
 import  fs  from 'fs';
-
 import { getLocations, planTrip, planTripFromCurrentLocation } from "../text-completion/requests.js";
 import bodyParser from 'body-parser';
 import { generateText } from "../image recognition/textGeneration.js";

@@ -7,6 +7,6 @@ function showOptions() {
 function selectOption(option) {
     // saved option value in localStorage
     localStorage.setItem('selectedOption', option);
-    window.location.href = 'new_trip.html';
+    window.location.href = '/html/new_trip.html';
 }
   
