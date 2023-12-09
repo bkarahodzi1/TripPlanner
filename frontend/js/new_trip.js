@@ -21,9 +21,10 @@ function onSubmit(){
     visibility: visible;
     width: 100px;
     height: 100px;
+    display: block;
     position: absolute;
     top: 50%;
-    left: 40%;
+    left: 46%;
     margin: -50px 0 0 -50px;
     z-index: 1000;
     `
@@ -168,15 +169,17 @@ submitButton.addEventListener('click', function () {
                 height: 100px;
                 position: absolute;
                 top: 50%;
-                left: 40%;
+                left: 50%;
                 margin: -50px 0 0 -50px;
                 visibility:hidden;
+                display: none;
                 `
                 let fullContainer = document.getElementById("container")
                 fullContainer.style.cssText = `
                 height: 100vh;
                 display: flex;
                 align-items: center; 
+               
                 background-image: url("../img/random_images/background1.png");
                 -webkit-filter: blur(0px);
                 -moz-filter: blur(0px);
