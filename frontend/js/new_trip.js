@@ -204,6 +204,7 @@ submitButton.addEventListener('click', function () {
                 recommended_list = data["0"];
                 console.log("VELICINA JE " + recommended_list.length)
                 let container = document.getElementById("card-container");
+                container.innerHTML = '';
                 let max = 3;
                 if (recommended_list.length>3){
                     max=3;
