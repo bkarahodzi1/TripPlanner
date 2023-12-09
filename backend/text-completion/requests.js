@@ -90,14 +90,17 @@ function appendUrlsToLocations(locations, imageUrls) {
 
 
 export async function getLocations(start_point, interests, budget, categories, trip_length, image_description = null, previouse_response = null) {
-    let content = `Give me 3 locations for my trip.
+    let content=""
+    if(image_description != undefined){
+        content+="This is a description of what should my locations look like, Give me 3 locations for my trip."
+    }
+    else{
+     content += `Give me 3 locations for my trip.
     My start point is from ${start_point}. My interests include ${interests}.
     My budget is ${budget} euros in cost include all transportation costs, accomodation and all other expenses.
     Things that I like are ${categories.join(', ')}.
     My trip should last ${trip_length} days
     `;
-    if (image_description != undefined) {
-        content += `Also, this is a description of how the locations should look like: ${image_description}`
     }
     content += "I want you to give me list of locations with name of the location and description of that location. Result is mandatory to be in JSON in this form: array of Locations with keys LocationName" +
         + ", Description.If start point isnt any place in world then return JSON with key error and value of your explanation. If costs of this trip added exceed my budget return JSON object" +
