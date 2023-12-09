@@ -202,10 +202,14 @@ submitButton.addEventListener('click', function () {
                     return;
                 }
                 recommended_list = data["0"];
+                console.log("VELICINA JE " + recommended_list.length)
                 let container = document.getElementById("card-container");
                 let max = 3;
-                if (recommended_list<3){
+                if (recommended_list.length>3){
                     max=3;
+                }
+                else if (recommended_list.length<3){
+                    max=recommended_list.length;
                 }
                 let loader = document.getElementById("loader");
                 let fullContainer = document.getElementById("container")
