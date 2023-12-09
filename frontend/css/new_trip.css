@@ -50,6 +50,7 @@ label{
     margin-bottom: 20px; /* Add some margin between sections */
 }
 #startPoint_div,
+#location_div,
 #interests_div,
 #budget_div,
 #categories_div,
@@ -87,6 +88,7 @@ label{
     width: 270px;
 }
 #startPoint,
+#location,
 #interests,
 #budget,
 #time{

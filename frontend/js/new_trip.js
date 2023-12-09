@@ -2,7 +2,7 @@ let recommended_list = [];
 let body = {}
 let trip_plan = []
 
-function unsetLoaderCss(loader,container){
+function unsetLoaderCss(loader, container) {
     loader.style.cssText = `
     width: 100px;
     height: 100px;
@@ -13,7 +13,7 @@ function unsetLoaderCss(loader,container){
     visibility:hidden;
     display: none;
     `
-   
+
     container.style.cssText = `
     height: 100vh;
     display: flex;
@@ -32,7 +32,7 @@ function onSubmit() {
     let loader = document.getElementById("loader");
     let container = document.getElementById('container');
 
-    
+
 
     container.style.cssText = `
     height: 100vh;
@@ -60,7 +60,7 @@ function onSubmit() {
 
 }
 
-function handleButtonText(){
+function handleButtonText() {
     document.getElementById("submit").textContent = "Generate";
 }
 function onLoadPage() {
@@ -147,7 +147,7 @@ function openPlan(btnDivRef) {
             trip_plan["duration"] = body["trip_length"];
             localStorage.setItem("tripPlan", JSON.stringify(trip_plan["0"]));
             window.location.href = '/html/tourist-guide.html';
-        })  
+        })
         .catch(error => {
             console.error('Error:', error);
         });
@@ -275,9 +275,9 @@ submitButton.addEventListener('click', function () {
                     alert(data["error"]);
                     let fullContainer = document.getElementById("container");
                     let loader = document.getElementById("loader");
-                    unsetLoaderCss(loader,fullContainer)
-                   
-                   
+                    unsetLoaderCss(loader, fullContainer)
+
+
                     return;
                 }
                 recommended_list = data["0"];
@@ -287,11 +287,11 @@ submitButton.addEventListener('click', function () {
                 images.style.display = "none";
                 container.innerHTML = '';
                 let max = 3;
-                if (recommended_list.length>3){
-                    max=3;
+                if (recommended_list.length > 3) {
+                    max = 3;
                 }
-                else if (recommended_list.length<3){
-                    max=recommended_list.length;
+                else if (recommended_list.length < 3) {
+                    max = recommended_list.length;
                 }
                 let loader = document.getElementById("loader");
                 let fullContainer = document.getElementById("container")
@@ -299,9 +299,9 @@ submitButton.addEventListener('click', function () {
                     console.log("ADDING CARD");
                     const locationCard = document.createElement('div');
                     locationCard.classList.add('location-card');
-                    if (recommended_list[i]["LocationName"]==undefined||recommended_list[i]["Description"]==undefined){
+                    if (recommended_list[i]["LocationName"] == undefined || recommended_list[i]["Description"] == undefined) {
                         alert("Something went wrong, try again!");
-                        unsetLoaderCss(loader,fullContainer)
+                        unsetLoaderCss(loader, fullContainer)
                         return
                     }
                     locationCard.innerHTML = `
@@ -321,18 +321,46 @@ submitButton.addEventListener('click', function () {
                     </div>`
                     container.appendChild(locationCard);
                 }
-                
+
                 unsetLoaderCss(loader, fullContainer);
-                
+
             }
             )
             .catch(error => {
                 console.log("ERROR");
                 console.error('Error:', error);
-                
+
             });
     } else if (option == "guide") {
-
+        body = {};
+        body["location"] = document.getElementById("location_div").getElementsByTagName("textarea")[0].value;
+        body["interests"] = document.getElementById("interests_div").getElementsByTagName("textarea")[0].value;
+        body["budget"] = document.getElementById("budget_div").getElementsByTagName("textarea")[0].value;
+        body["categories"] = [];
+        for (let cat of document.getElementById("categories_div").getElementsByTagName("input"))
+            if (cat.checked)
+                body["categories"].push(cat.value);
+        body["trip_length"] = document.getElementById("time_div").getElementsByTagName("input")[0].value;
+        console.log("GENERATE BUTTON CLICKED");
+        const url = 'http://localhost:4000/tguide';
+        console.log(body);
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+            .then(response => response.json())
+            .then(data => {
+                trip_plan = data;
+                trip_plan["duration"] = body["trip_length"];
+                localStorage.setItem("tripPlan", JSON.stringify(trip_plan["0"]));
+                window.location.href = '/html/tourist-guide.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 });
 
