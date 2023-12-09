@@ -45,11 +45,15 @@
         </div>
         <div id="info-text">
             <p>
+                <b>Location</b><br>
+                Tell me we are you traveling or where are you stationed right now?
+            </p>
+            <p>
                 <b>Interests</b><br>
                 Tell me about what interests you generally, so I can recommend places that fit you better.
             </p>
             <p>
-                <b>Budget</b><br>
+                <b>Budget (in euros)</b><br>
                 Tell me what is the maximum of your budget you are willing to spend on this trip in euros.
             </p>
             <p>
@@ -69,6 +73,10 @@
             <img id="album" src="../img/random_images/background1.jpg" alt="placeholder">
         </div>
         <div id="form">
+            <div id="location_div">
+                <label>Location:</label><br>
+                <textarea id="location" rows="2" placeholder="Where are you traveling?"></textarea>
+            </div>
             <div id="startPoint_div">
                 <label>Starting Point:</label><br>
                 <textarea id="startPoint" rows="2" placeholder="What is the starting point of your trip?"></textarea>
@@ -114,24 +122,7 @@
                 <button  id="submit" onclick="onSubmit()">Generate</button>
             </div>
         </div>
-            <div id="card-container">
-                <div id="location-card">
-                    <div class="image">
-                        <img src="../img/pocetna4.jpg" alt="Slika lokacije">
-                    </div>
-                    <div class="content">
-                        <div class="title">
-                            <p><b>CITY NAME</b></p>
-                        </div>
-                        <div class="description">
-                            <p>DESCRIPTION JSDHHADSJ HDJAFDSHDJ HJDFJHDAF SDFHHADFJOdjadfhjfafj, jdfhfjdhfj, fdasjfjdh</p>
-                        </div>
-                    </div>
-                    <div class="button">
-                        <button id="btn"><b>Choose</b></button>
-                    </div>
-                </div>
-        </div>
+        <div id="card-container"></div>
     </div>
 
     <script src="../js/new_trip.js"></script>

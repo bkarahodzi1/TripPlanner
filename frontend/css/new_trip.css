@@ -50,6 +50,7 @@ label{
     margin-bottom: 20px; /* Add some margin between sections */
 }
 #startPoint_div,
+#location_div,
 #interests_div,
 #budget_div,
 #categories_div,
@@ -57,11 +58,17 @@ label{
     width: 100%;
     margin-bottom: 20px; /* Add some margin between sections */
 }
-#submit_div {
+#submit_div{
     width: 100%;
     box-sizing: border-box;
 }
-
+#selection_div{
+    width:50%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+}
 #album_div {
     position: fixed;
     width: 50%;
@@ -87,6 +94,7 @@ label{
     width: 270px;
 }
 #startPoint,
+#location,
 #interests,
 #budget,
 #time{
@@ -109,7 +117,7 @@ label{
     font-size: 120%;
     margin-top: 10px;
 }
-#submit{
+#submit, #return, #onImgBtn, #onParamsBtn{
     font-family:Cambria;
     color: #0d3c52;
     padding: 13px 40px;
@@ -120,7 +128,19 @@ label{
     margin-top: 20px;
     background-color: #91c8e4;
 }
-#submit:hover{
+#onImgBtn{
+    margin-right: 10px;
+}
+#onParamsBtn{
+    margin-left: 10px;
+}
+#onImgBtn, #onParamsBtn{
+    width: 30%;
+    min-height: 40%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+#submit:hover, #return:hover, #onImgBtn:hover, #onParamsBtn:hover{
     font-family:Cambria;
     color: #0d3c52;
     padding: 13px 40px;
@@ -130,6 +150,13 @@ label{
     cursor: pointer;
     margin-top: 20px;
     background-color: #9f948e;
+}
+#onImgBtn:hover, #onParamsBtn:hover{
+    padding-top: 3%;
+    padding-bottom: 3%;    
+}
+#header{
+    font-size: 270%;
 }
 #info-button-container {
     position: fixed;

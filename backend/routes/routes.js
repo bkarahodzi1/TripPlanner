@@ -22,7 +22,8 @@ router.post('/locations', async (req,res)=>{
     let base64 = req.body['base64']
     let image_description = undefined;
     if (base64 != undefined){
-        image_description = generateText(base64);
+        image_description = await  generateText(base64);
+        console.log("picture desc " + image_description.toString())
     } 
     let body = req.body;
     let locations = await getLocations(body['start_point'], body['interests'], body['budget'], body['categories'], body['trip_length'],image_description);

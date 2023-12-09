@@ -29,35 +29,23 @@ export function createImageFromTextSplash(cityTitles) {
 
 
 
-export async function createImageFromText(cityTitles){
+export async function createImageFromText(){
 
-    console.log(cityTitles);
+
     
     const response = await openai.images.generate({
         model: "dall-e-3",
-        prompt: "Picture of " + cityTitles[0],
+        prompt: "Picture of nature in purple, blue, white",
         n: 1,
         size: "1024x1024"
       });
       
-      image1 = response1.data[0].url;
+      let image = response.data[0].url;
 
-      const response2 = await openai.images.generate({
-        model: "dall-e-3",
-        prompt: "Picture of " + cityTitles[1],
-        n: 1,
-        size: "1024x1024"
-      });
-      image2 = response2.data[0].url;
-
-      const response3 = await openai.images.generate({
-        model: "dall-e-3",
-        prompt: "Picture of " + cityTitles[2],
-        n: 1,
-        size: "1024x1024"
-      });
-      image3 = response3.data[0].url;
+      
 
 
-      return image1,image2,image3;
+      return image;
 }
+
+

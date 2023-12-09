@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 
-
 import OpenAI from "openai";
 
 const openai = new OpenAI({apiKey : process.env.apiKey});
@@ -27,6 +26,7 @@ export async function generateText(base64) {
       },
     ],
   });
+  console.log(response.choices[0]);
   return response.choices[0];
 }
 
