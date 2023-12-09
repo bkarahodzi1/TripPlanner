@@ -6,12 +6,20 @@ function onLoadPage() {
 
     }
     else if (option == 'guide') {
-        let startPoint = document.getElementById("startPoint_p");
+        let startPoint = document.getElementById("startPoint_div");
         startPoint.remove();
         console.log("else if")
         let title = document.title;
         title = "Tourist guide";
     }
+}
+let counter = 1;
+function imgSwitcher(){
+    if (counter==3)
+        counter=1;
+    let image = document.getElementById('album');
+    image.src = `../img/random_images/background${counter}.jpg`;
+    counter+=1;
 }
 
 let submitButton = document.getElementById("submit_div").getElementsByTagName("button")[0];
@@ -63,3 +71,4 @@ submitButton.addEventListener('click', function () {
 });
 
 window.onLoad = onLoadPage();
+setInterval(imgSwitcher, 5000);

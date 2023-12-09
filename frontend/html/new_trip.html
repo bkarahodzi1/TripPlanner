@@ -11,20 +11,20 @@
 <body>
     <div id="container">
         <div id="album_div">
-            <img id="album" src="../img/2846005556_0f5bc44419_o.jpg" alt="placeholder">
+            <img id="album" src="../img/random_images/background2.jpg" alt="placeholder">
         </div>
         <div id="form">
             <div id="startPoint_div">
                 <label>Starting Point:</label><br>
-                <input type="text" id="startPoint" placeholder="What is the starting point of your trip?">
+                <textarea id="startPoint" rows = "2" placeholder="What is the starting point of your trip?"></textarea>
             </div>
             <div id="interests_div">
                 <label>Interests:</label><br>
-                <input type="text" id="interests" placeholder="Tell me about your interests.">
+                <textarea id="interests" rows="4" placeholder="Tell me about your interests."></textarea>
             </div>
             <div id="budget_div">
                 <label>Budget:</label><br>
-                <input type="text" id="budget" placeholder="What is your maximum budget?">
+                <textarea id="budget" rows = "2" placeholder="What is your maximum budget?"></textarea>
             </div>
             <div id="categories_div">
                 <label>Categories:</label><br>
@@ -41,8 +41,8 @@
                 </label>
             </div>
             <div id="time_div">
-                <label>Time:</label><br>
-                <input type="number" id="time" min="1">
+                <label>Time (in days):</label><br>
+                <input type="number" id="time" min="1" placeholder="1">
             </div>
             <div id="photo_div">
                 <form>
@@ -51,7 +51,7 @@
                 </form>
             </div>
             <div id="submit_div">
-                <button>GENERATE</button>
+                <button id="submit">GENERATE</button>
             </div>
         </div>
     </div>
