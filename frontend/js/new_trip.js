@@ -130,6 +130,34 @@ function imgSwitcher() {
 let submitButton = document.getElementById("submit_div").getElementsByTagName("button")[0];
 
 function openPlan(btnDivRef) {
+    let loader = document.getElementById("loader");
+    let container = document.getElementById('container');
+
+    
+
+    container.style.cssText = `
+    height: 100vh;
+    display: flex;
+    align-items: center; 
+    background-image: url("../img/random_images/background1.png");
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    `
+
+    loader.style.cssText = `
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 46%;
+    margin: -50px 0 0 -50px;
+    z-index: 1000;
+    `
     console.log("CHOOSE BUTTON CLICKED");
     const url = 'http://localhost:4000/plan';
     body["location"] = recommended_list[btnDivRef.id]["LocationName"];
@@ -146,6 +174,8 @@ function openPlan(btnDivRef) {
             trip_plan = data;
             trip_plan["duration"] = body["trip_length"];
             localStorage.setItem("tripPlan", JSON.stringify(trip_plan["0"]));
+            let fullContainer = document.getElementById("container");
+            unsetLoaderCss(loader,fullContainer);
             window.location.href = '/html/tourist-guide.html';
         })  
         .catch(error => {
