@@ -1,5 +1,4 @@
 recommended_list = [];
-
 function onLoadPage() {
     let option = localStorage.getItem('selectedOption');
     if (option == 'guide') {
@@ -9,6 +8,20 @@ function onLoadPage() {
         title = "Tourist guide";
     }
 }
+document.addEventListener('DOMContentLoaded', function () {
+    var infoButton = document.getElementById('info-button');
+    var infoText = document.getElementById('info-text');
+
+    infoButton.addEventListener('mouseover', function () {
+        infoText.style.opacity = 1;
+        infoText.style.zIndex = 999;
+    });
+
+    infoButton.addEventListener('mouseout', function () {
+        infoText.style.opacity = 0;
+        infoText.style.zIndex = -1;
+    });
+});
 let counter = 2;
 function imgSwitcher() {
     if (counter == 4)
