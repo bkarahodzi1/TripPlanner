@@ -42,7 +42,16 @@ body {
     overflow: hidden;
 
   }
-  
+  #home{
+    position: absolute;
+    top:1%;
+    left:1%;
+    width: 3%;
+    height: auto;
+  }
+  #home:hover{
+      cursor: pointer;
+  }
   button {
     background-color: #91c8e4;
     font-family:Cambria;

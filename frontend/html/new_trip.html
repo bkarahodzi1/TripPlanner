@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <img id="home" src="../img/home.png" alt="home" onclick="goHome()"></img>
     <div id="loader" style="display:none;visibility:hidden;">
         <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -112,13 +113,7 @@
             </div>
             <div id="submit_div">
                 <button  id="submit" onclick="onSubmit()">Generate</button>
-                <button  id="return" onclick="onReturn()">Return</button>
             </div>
-        </div>
-        <div id = "selection_div">
-            <h1 id="header">Generate based on</h1>
-            <button id = "onImgBtn" onclick="generateBasedOnImage()">Image</button>
-            <button id = "onParamsBtn" onclick="generateBasedOnParams()">Paramaters</button>
         </div>
         <div id="card-container"></div>
     </div>

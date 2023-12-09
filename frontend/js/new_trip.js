@@ -290,49 +290,8 @@ submitButton.addEventListener('click', function () {
     }
 });
 
-function generateBasedOnImage(){
-    let selectionDiv = document.getElementById("selection_div");
-    let form = document.getElementById("form");
-    selectionDiv.style.display = "none";
-    form.style.display = "block";
-    let startPoint_div = document.getElementById("startPoint_div");
-    let interests_div = document.getElementById("interests_div");
-    let budget_div = document.getElementById("budget_div");
-    let categories_div = document.getElementById("categories_div");
-    let time_div = document.getElementById("time_div");
-    let photo_div = document.getElementById("photo_div");
-    photo_div.style.display = "block";
-    startPoint_div.style.display = "none";
-    interests_div.style.display = "none";
-    budget_div.style.display = "none";
-    categories_div.style.display = "none";
-    time_div.style.display = "none";
-}
-
-function generateBasedOnParams(){
-    let selectionDiv = document.getElementById("selection_div");
-    let form = document.getElementById("form");
-    let startPoint_div = document.getElementById("startPoint_div");
-    let interests_div = document.getElementById("interests_div");
-    let budget_div = document.getElementById("budget_div");
-    let categories_div = document.getElementById("categories_div");
-    let time_div = document.getElementById("time_div");
-    selectionDiv.style.display = "none";
-    form.style.display = "block";
-    let photo_div = document.getElementById("photo_div");
-    photo_div.style.display = "none";
-    startPoint_div.style.display = "block";
-    interests_div.style.display = "block";
-    budget_div.style.display = "block";
-    categories_div.style.display = "block";
-    time_div.style.display = "block";
-}
-
-function onReturn(){
-    let selectionDiv = document.getElementById("selection_div");
-    let form = document.getElementById("form");
-    selectionDiv.style.display = "block";
-    form.style.display = "none";
+function goHome(){
+    window.location.href = "http://localhost:4000/home";
 }
 
 window.onLoad = onLoadPage();

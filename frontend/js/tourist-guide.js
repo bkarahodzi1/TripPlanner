@@ -1,3 +1,7 @@
+function goHome(){
+    window.location.href = "http://localhost:4000/home";
+}
+
 window.onload = function () {
     console.log("UŠOOO");
     console.log(localStorage.getItem("tripPlan"));
