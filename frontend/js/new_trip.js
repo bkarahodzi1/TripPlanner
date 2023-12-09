@@ -126,6 +126,7 @@ submitButton.addEventListener('click', function () {
 
                     container.appendChild(locationCard);
                 }
+                
             })
             .catch(error => {
                 console.error('Error:', error);
